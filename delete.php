@@ -13,6 +13,10 @@ session_start();
     <?php
         if ($_SESSION["username"] != "admin" && $_SESSION["role"] != "a"){
             echo "<meta http-equiv=Refresh content=0;URL=index.php>";
+        }else{
+            $num = $_GET['id'];
+            echo "ลบกระทู้ หมายเลข $num<br>";
+            echo "<a href=index.php>กลับไปหน้าหลัก</a>";
         }
     ?>
 </body>

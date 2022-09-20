@@ -24,36 +24,39 @@ session_start();
             <option value="เรื่องเรียน">เรื่องเรียน</option>
         </select>
     </p>
-    <?php
-    if (isset($_SESSION["username"])) {
-        if ($_SESSION["username"] == "admin") {
-            echo "<div style=text-align:right>ผู้ใช้งานระบบ : $_SESSION[username] <a href=logout.php>ออกจากระบบ</a><br>";
-            echo "<div style=text-align:left;><a href=newpost.php>สร้างกระทู้ใหม่</a></div>";
+    <form action="delete.php" method="post">
+        <?php
+        if (isset($_SESSION["id"])) {
+            if ($_SESSION["username"] == "admin") {
+                echo "<div style=text-align:right>ผู้ใช้งานระบบ : $_SESSION[username] <a href=logout.php>ออกจากระบบ</a><br>";
+                echo "<div style=text-align:left;><a href=newpost.php>สร้างกระทู้ใหม่</a></div>";
+                $A = 1;
+                $B = 11;
+                while ($A < $B) {
+                    if ($_SESSION["role"] == "a") {
+                        echo "<div style=text-align:left;><ul><li><a href=post.php?id=$A>กระทู้ที่ $A</a> <a href=delete.php?id=$A> ลบ </a></li></ul></div>";
+                        $A++;
+                    } else {
+                        echo "<div style=text-align:left;><ul><li><a href=post.php?id=$A>กระทู้ที่ $A</li></ul></a></div>";
+                        $A++;
+                    }
+                }
+            } else if ($_SESSION["username"] == "member") {
+                echo "<div style=text-align:right>ผู้ใช้งานระบบ : $_SESSION[username] <a href=logout.php>ออกจากระบบ</a><br>";
+                echo "<div style=text-align:left;><a href=newpost.php>สร้างกระทู้ใหม่</a></div>";
+            }
+        } else {
+            echo "<div style=text-align:right><a href=login.php>เข้าสู่ระบบ</a></div>";
             $A = 1;
             $B = 11;
             while ($A < $B) {
-                if ($_SESSION["role"] == "a") {
-                    echo "<div style=text-align:left;><ul><li><a href=post.php?id=$A>กระทู้ที่ $A</a> <a href=delete.php?id=$A> ลบ </a></li></ul></div>";
-                    $A++;
-                } else {
-                    echo "<div style=text-align:left;><ul><li><a href=post.php?id=$A>กระทู้ที่ $A</li></ul></a></div>";
-                    $A++;
-                }
+                echo "<div style=text-align:left;><ul><li><a href=post.php?id=$A>กระทู้ที่ $A</li></ul></a></div>";
+                $A++;
             }
-        } else if ($_SESSION["username"] == "member") {
-            echo "<div style=text-align:right>ผู้ใช้งานระบบ : $_SESSION[username] <a href=logout.php>ออกจากระบบ</a><br>";
-            echo "<div style=text-align:left;><a href=newpost.php>สร้างกระทู้ใหม่</a></div>";
         }
-    } else {
-        echo "<div style=text-align:right><a href=login.php>เข้าสู่ระบบ</a></div>";
-        $A = 1;
-        $B = 11;
-        while ($A < $B) {
-            echo "<div style=text-align:left;><ul><li><a href=post.php?id=$A>กระทู้ที่ $A</li></ul></a></div>";
-            $A++;
-        }
-    }
-    ?>
+        ?>
+    </form>
+
 
 </body>
 
