@@ -44,6 +44,12 @@ session_start();
             } else if ($_SESSION["username"] == "member") {
                 echo "<div style=text-align:right>ผู้ใช้งานระบบ : $_SESSION[username] <a href=logout.php>ออกจากระบบ</a><br>";
                 echo "<div style=text-align:left;><a href=newpost.php>สร้างกระทู้ใหม่</a></div>";
+                $A = 1;
+                $B = 11;
+                while ($A < $B) {
+                    echo "<div style=text-align:left;><ul><li><a href=post.php?id=$A>กระทู้ที่ $A</li></ul></a></div>";
+                    $A++;
+                }
             }
         } else {
             echo "<div style=text-align:right><a href=login.php>เข้าสู่ระบบ</a></div>";
